@@ -1,18 +1,75 @@
+Most of this is just direct quotes from documentation. Paraphrased some things.
+Exam MB2-716
+
 # Configure Microsoft Dynamics 365 (20% - 25%)
 
 ## Configure Microsoft Dynamics 365 settings
 
-### Configure auditing
+### Configure [Auditing](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/auditing-overview)
 
-### Document management, and collaboration
+> ###### The following bullets identify some key auditing concepts:
+> 
+> * You can enable or disable auditing at the organization, entity, and attribute levels. If auditing is not enabled at the organization level, auditing of entities and attributes, even if it is enabled, does not occur. By default, auditing is enabled on all auditable entity attributes, but is disabled at the entity and organization level.
+> 
+> * For Dynamics 365 (on-premises) servers that use SQL Server Enterprise editions, auditing data is recorded over time (quarterly) in partitions. A partition is called an audit log in the Dynamics 365 web application. Partitions are not supported, and therefore, not used, on a Dynamics 365 (online) server that is running SQL Server, Standard edition.
+> 
+> * The ability to retrieve and display the audit history is restricted to users who have certain security privileges: View Audit History, and View Audit Summary. There are also privileges specific to partitions: View Audit Partitions, and Delete Audit Partitions. See the specific message request documentation for information about the required privileges for each message.
+> 
+> * Audited data changes are stored in records of the audit entity.
+> 
+> ###### Data that can be audited
+> 1. Create, update, and delete operations on records.
+> 
+> 2. Changes to the shared privileges of a record.
+> 
+> 3. N:N association or disassociation of records.
+> 
+> 4. Changes to security roles.
+> 
+> 5. Audit changes at the entity, attribute, and organization level. For example, enabling audit on an entity.
+> 
+> 6. Deletion of audit logs.
+> 
+> 7. When (date/time) a user accesses Dynamics 365 data, for how long, and from what client.
+> 
+> 8. Enabling or disabling of field level security by setting the IsSecured attribute cannot be audited.
+> 
+### [Document management](https://docs.microsoft.com/en-us/dynamics365/unified-operations/fin-and-ops/organization-administration/configure-document-management), and collaboration
 
 ### Configure administration settings
 
 ### Perform data management tasks
 
-# Perform user management
+#### [Duplicate Detection](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/detect-duplicate-data-for-developers)
 
-### Implement themes
+#### [Bulk Delete Data](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/delete-data-bulk)
+
+#### [Import data](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/import-data)
+
+Beyond importing data via Excel upload you can do the following with Dynamics 365 web services
+> Create data maps that include complex transformation mapping, such as concatenation, split, and replace.
+> 
+> * Define custom transformation mapping.
+> 
+> * View source data that is stored inside the temporary parse tables.
+> 
+> * Access error logs to build custom error reporting tools with improved error logging views.
+> 
+> * Run data import by using command-line scripts.
+> 
+> * Add LookupMapXML tags in the data map to indicate that the data lookup will be initiated and performed on a source file that is used in the import.
+> 
+> * Add custom OwnerMetadataXML tags in the data map to match the user records in the source file with the records of the user (system user) in Dynamics 365.
+> 
+> * Use optional validation checks.
+> 
+
+### Perform user management
+
+### [Implement themes](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/customize-dev/query-and-edit-an-organization-theme)
+
+Add a logo, change color pallette
+
 
 ## Manage Microsoft Dynamics 365 security
 
@@ -36,23 +93,70 @@
 
 ## Configure email services
 
--
-  - Identify integration options, configure email server profiles and default organization email settings, enable server-side email synchronization, enable folder tracking, map exchange folders, set up and configure the CRM App for Outlook
+### Identify integration options
+
+### Configure email server profiles and default organization email settings
+
+### Enable server-side email synchronization 
+
+### Enable folder tracking 
+
+### Map exchange folders 
+
+### Set up and configure the CRM App for Outlook
 
 ## Integrate Microsoft Dynamics 365 with other Office 365 offerings
 
--
-  - Select the appropriate Office 365 group integration, create and configure Office 365 groups, integrate Microsoft Dynamics 365 and SharePoint, enable linking to OneNote files, set up and configure OneNote integration, configure OneDrive integration
+### Select the appropriate Office 365 group integration
+
+### Create and configure Office 365 groups
+ 
+### Integrate Microsoft Dynamics 365 and SharePoint
+
+### Enable linking to OneNote files, set up and configure OneNote integration
+
+### Configure OneDrive integration
 
 # Implement Microsoft Dynamics 365 entities, entity relationships, and fields (20% - 25%)
 
 ## Manage Microsoft Dynamics 365 entities
 
-### Manage entity ownership
+### Manage [entity ownership](https://msdn.microsoft.com/en-us/library/gg309396.aspx#EntityOwnership)
+
+>There are several types of entity ownership. Most entities, including custom entities, are owned by the organization, by a user, or a team. There are some business entities that do not have an owner, such as discount type (discount list), where the ownership is defined by its parent entity discount. The type of ownership defines some of the operations that can be performed on a record. Ownership for an entity is defined in the metadata property OwnershipType. The following table lists the ownership properties.
+
+[read here](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/use-managed-properties#apply-managed-properties)
+
+Good explanation [here](https://community.dynamics.com/crm/b/crmbusiness/archive/2014/12/02/crm-entity-ownership-how-do-you-decide)
+
+|  Ownership Type | Description  |
+|------|---|
+|Organization Owned   | Contains data involving something that belongs to or that can be viewed by the whole organization. Organization-owned entities cannot be assigned or shared. For example, products are owned by the organization. These entities have an attribute named organizationid.  |
+|Business Owned   | Entities that belong to a business unit. These entities have an attribute named owningbusinessunit.  |
+|User or Team Owned   | Assigned to a user or to a team. These entities contain data that relates to customers, such as accounts or contacts. Security can be defined according to the business unit for the user or team. These entities have attributes named owningteam and owninguser.  |
+|None | These entities are not owned by another entity. |
+
+
+
 
 ### Manage entity properties
 
-[read here](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/use-managed-properties#apply-managed-properties)
+I'm guessing they are talking about [this](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/use-managed-properties#apply-managed-properties) (preview below)
+
+
+|Component|Display Name|Property|
+|---|---|
+|Entity|Can be customized|IsCustomizable. |
+|Entity|Display name can be modified|IsRenameable. |
+|Entity|Can be related entity in relationship|CanBeRelatedEntityInRelationship. |
+|Entity|Can be primary entity in relationship|CanBePrimaryEntityInRelationship. |
+|Entity|Can be in many-to-many relationship|CanBeInManyToMany. |
+|Entity|New forms can be created|CanCreateForms. |
+|Entity|New charts can be created|CanCreateCharts. |
+|Entity|New views can be created|CanCreateViews. |
+|Entity|Can change any other entity properties not represented by a managed property|CanModifyAdditionalSettings. |
+
+
 
 ### Configure system entities
 
