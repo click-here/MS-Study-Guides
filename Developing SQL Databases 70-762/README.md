@@ -1,17 +1,57 @@
 https://www.microsoft.com/en-us/learning/exam-70-762.aspx
+Nearly everything copied directly from microsoft docs where possible, links provided where I saw fit.
+
 
 # Design and implement database objects (25–30%)
 
 ## Design and implement a relational database schema
 
 ### Design Tables And Schemas Based On Business Requirements
-### Improve The Design Of Tables By Using Normalization
-### Write Table Create Statements
-### Determine The Most Efficient Data Types To Use
+### [Improve The Design Of Tables By Using Normalization](https://support.microsoft.com/en-us/help/283878/description-of-the-database-normalization-basics)
+### [Write Table Create Statements](https://docs.microsoft.com/en-us/sql/t-sql/statements/create-table-transact-sql?view=sql-server-2017)
+
+Syntax
+```sql
+--Simple CREATE TABLE Syntax (common if not using options)  
+CREATE TABLE   
+    [ database_name . [ schema_name ] . | schema_name . ] table_name   
+    ( { <column_definition> } [ ,...n ] )   
+[ ; ]
+```
+
+Example:
+
+```sql
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255) 
+);
+```
+[Source](https://www.w3schools.com/sql/sql_create_table.asp)
+
+### [Determine The Most Efficient Data Types To Use](https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-2017)
+
+**Exact Numerics**: bigint, numeric, bit, smallint, decimal, smallmoney, int, tinyint, money
+
+**Approximate numerics**: float, real
+
+**Date and time**: date, datetimeoffset, datetime2, smalldatetime, datetime, time
+
+**Character strings**: char, varchar, text
+
+**Unicode character strings**: nchar, nvarchar, ntext
+
+**Binary strings**: binary, varbinary, image
+
 
 ## Design and implement indexes
 
 ### Design New Indexes Based On Provided Tables; Queries; Or Plans
+[Columnstore indexes: Overview](https://docs.microsoft.com/en-us/sql/relational-databases/indexes/columnstore-indexes-overview?view=sql-server-2017)
+
 ### Distinguish Between Indexed Columns And Included Columns
 ### Implement Clustered Index Columns By Using Best Practices
 ### Recommend New Indexes Based On Query Plans
